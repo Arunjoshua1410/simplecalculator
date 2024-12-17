@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+<div class="mainCon">
+
+  <div class="input">
+    <input type="text" id="display" placeholder="0"  name="display">
+  </div>
+
+<div class="calbox">
+  <div class="clear">
+    <input type="button" value="CE" onclick= "display.value = ''  " >
+    <input type="button" value="DET" onclick= "display.value = display.value.slice(0,-1)" >
+    <input id="plus" type="button" value="+" onclick= "display.value += '+'" >  
+     <input id="equal" type="button" value="-" onclick= "display.value += '-'" >
+  </div>
+
+  <div class="row1">
+    <input type="button" id="seven" value="7" onclick= "display.value += '7'" >
+    <input type="button" value="8" onclick= "display.value += '8'" >
+    <input type="button" value="9"onclick= "display.value += '9'" >
+    <input type="button" value="/" onclick= "display.value += '/'" >
+  </div>
+
+  <div class="row2">
+    <input type="button" value="4" onclick= "display.value += '4'" >
+    <input type="button" value="5" onclick= "display.value += '5'" >
+    <input type="button" value="6" onclick= "display.value += '6'" >
+    <input type="button" value="*" onclick= "display.value += '*'" >
+  </div>
+
+  <div class="row3">
+    <input type="button" value="1" onclick= "display.value += '1'" >
+    <input type="button" value="2" onclick= "display.value += '2'" >
+    <input type="button" value="3" onclick= "display.value += '3'" >
+    <input type="button" value="%" onclick= "display.value += '%'" >
+  </div>
+
+  <div class="row4">
+    <input type="button" value="0" onclick= "display.value += '0'" >
+    <input type="button" value="00" onclick= "display.value += '00'" >
+    <input type="button" value="." onclick= "display.value += '.'" >
+    <input type="button" value="="onclick= "display.value = eval(display.value)" >
+   </div>
+  </div>
+ </div>
+</div>
+
+<script>
+    document.addEventListener('keydown', function(event) {
+      const display = document.getElementById('display');
+      const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '%', '.', 'Enter', 'Backspace', 'Delete'];
+      
+      if (allowedKeys.includes(event.key)) {
+        if (event.key === 'Enter') {
+          // Evaluate the expression on Enter
+          try {
+            display.value = eval(display.value);
+          } catch {
+            display.value = 'Error';
+          }
+        } else if (event.key === 'Backspace') {
+          // Remove the last character on Backspace
+          display.value = display.value.slice(0, -1);
+        } else if (event.key === 'Delete') {
+          // Clear the display on Delete
+          display.value = '';
+        } else {
+          // Append the key's value to the display
+          display.value += event.key;
+        }
+      }
+      
+      // Prevent any default browser action for the keypress
+      event.preventDefault();
+    });
+  </script>
+  
+</body>
+</html>
